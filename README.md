@@ -1,137 +1,112 @@
 # 🚀 react-superfetch
 
-A lightweight and elegant API call utility for React (or any JavaScript project). Simplify your HTTP requests with a clean, easy-to-use syntax and built-in support for tokens, error handling, and more.
+**A powerful and minimalistic one-liner API utility for React (or any JavaScript project).**  
+Simplify your API calls with support for GET, POST, PUT, DELETE, and advanced features like loading, success, and error handling.
+
+---
 
 ## 📦 Installation
+
+Install the package via npm:
 
 ```bash
 npm install react-superfetch
 
-or with yarn:
-yarn add react-superfetch
 
-🔧 Features
-✅ One-liner API calls
+✨ Features
+✅ One-liner API call wrapper
 
-🔐 Optional Bearer token support
+✅ Supports GET, POST, PUT, DELETE
 
-🔄 Handles GET, POST, PUT, DELETE
+✅ Handles Authorization headers
 
-⚙️ Handles loading, success, and error states
+✅ Built-in loading, success, and error state handling
 
-💬 Supports custom success/error messages
-
-🚨 Automatic JSON parsing and error fallback
+✅ Works with React, Next.js, or any JS project
 
 
-
-📘 Basic Usage
+🔧 Usage
+Import callApi into your component or utility function:
 
 import callApi from 'react-superfetch';
 
-const fetchData = async () => {
-  const { data, loading, error, successMessage } = await callApi('https://jsonplaceholder.typicode.com/posts/1', {
-    method: 'GET',
-    token: 'your-jwt-token',
-    successMessage: 'Data fetched successfully!',
-    errorMessage: 'Failed to fetch data.',
-  });
+📘 Example Usage
 
-  if (loading) console.log('Loading...');
-  if (data) console.log('Data:', data);
-  if (error) console.error('Error:', error);
-};
+1. GET Request
 
-📂 Supported Methods
-🔹 GET
-
-const { data, loading, error } = await callApi('https://jsonplaceholder.typicode.com/posts', {
+const { data, loading, error, successMessage, errorMessage } = await callApi('https://jsonplaceholder.typicode.com/posts/1', {
   method: 'GET',
+  token: 'your-jwt-token',
 });
 
-🔹 POST
+2. POST Request
 
-const { data, successMessage } = await callApi('https://jsonplaceholder.typicode.com/posts', {
+const { data, loading, error, successMessage, errorMessage } = await callApi('https://jsonplaceholder.typicode.com/posts', {
   method: 'POST',
-  body: { title: 'Hello', body: 'World', userId: 1 },
-  token: 'your-token',
-  successMessage: 'Post created successfully!',
+  body: { title: 'foo', body: 'bar', userId: 1 },
+  token: 'your-jwt-token',
 });
 
-🔹 PUT
+3. PUT Request
 
-const { data } = await callApi('https://jsonplaceholder.typicode.com/posts/1', {
+const { data, loading, error, successMessage, errorMessage } = await callApi('https://jsonplaceholder.typicode.com/posts/1', {
   method: 'PUT',
-  body: { title: 'Updated Title' },
-  token: 'your-token',
+  body: { id: 1, title: 'updated title', body: 'updated content', userId: 1 },
+  token: 'your-jwt-token',
 });
 
-🔹 DELETE
+4. DELETE Request
 
-const { data } = await callApi('https://jsonplaceholder.typicode.com/posts/1', {
+const { data, loading, error, successMessage, errorMessage } = await callApi('https://jsonplaceholder.typicode.com/posts/1', {
   method: 'DELETE',
-  token: 'your-token',
+  token: 'your-jwt-token',
 });
 
 
-✅ Response Format
-Every response returns:
-
-{
-  data: any;
-  error: string | null;
-  loading: boolean;
-  successMessage?: string;
-}
+| Option   | Type   | Description                                      |
+| -------- | ------ | ------------------------------------------------ |
+| `method` | string | HTTP method (`GET`, `POST`, `PUT`, `DELETE`)     |
+| `body`   | object | Payload for POST/PUT requests                    |
+| `token`  | string | Bearer token for Authorization header (optional) |
 
 
-🧠 Best Practices
-🔁 Use with React Query or SWR for revalidation
+🔁 Return Values
+The function returns an object with the following keys:
 
-🔒 Always handle token securely
-
-🎯 Customize success/error messages per endpoint
-
-💥 Use error fallback UI in your React component
-
-
-
-🛠️ How to Contribute
-1. Fork the repository
-
-git clone https://github.com/your-username/react-superfetch.git
-cd react-superfetch
-
-2. Install dependencies
-
-npm install
-
-3. Make your changes
-
-Implement your feature or bug fix inside src/index.ts.
-
-4. Run tests (optional)
-
-npm test
-
-5. Push to your fork and open a PR
+| Key              | Type    | Description                              |
+| ---------------- | ------- | ---------------------------------------- |
+| `data`           | any     | API response data                        |
+| `loading`        | boolean | `true` when request is in progress       |
+| `error`          | boolean | `true` if request failed                 |
+| `successMessage` | string  | Success message if request is successful |
+| `errorMessage`   | string  | Error message if request failed          |
 
 
+💡 Advanced Tips
+Works with async/await or Promises
 
-🧪 Coming Soon
+Easily wrap this inside a custom React hook for global usage
 
-💥 Built-in retry logic
+Compatible with useEffect, react-query, redux, etc.
 
-💥 Timeout support
 
-💥 File uploads
+📁 Contributing
+Fork this repo.
 
-💥 Global configuration support
+Create a new branch: git checkout -b feature/my-feature
+
+Commit your changes: git commit -m 'Added new feature'
+
+Push to your branch: git push origin feature/my-feature
+
+Open a Pull Request
+
+📜 License
+MIT © pravinxdev
 
 
 👨‍💻 Author
 Made with ❤️ by pravinxdev
-
 
 
 
