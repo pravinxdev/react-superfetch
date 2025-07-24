@@ -18,12 +18,12 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var index_exports = {};
-__export(index_exports, {
-  default: () => index_default,
+var src_exports = {};
+__export(src_exports, {
+  default: () => src_default,
   setGlobalErrorHandler: () => setGlobalErrorHandler
 });
-module.exports = __toCommonJS(index_exports);
+module.exports = __toCommonJS(src_exports);
 var globalErrorHandler = null;
 var setGlobalErrorHandler = (handler) => {
   globalErrorHandler = handler;
@@ -71,7 +71,8 @@ var callApi = async (url, options = {}) => {
     fetchOptions.body = JSON.stringify(payload);
   }
   const performRequest = async (attempt = 0) => {
-    if (showLoading) log.info("Loading...");
+    if (showLoading)
+      log.info("Loading...");
     try {
       const controller = new AbortController();
       const id = setTimeout(() => controller.abort(), timeout);
@@ -91,7 +92,8 @@ var callApi = async (url, options = {}) => {
         throw new Error(`HTTP Error: ${response.status}`);
       }
       const data = await response.json();
-      if (successMessage) log.success(successMessage);
+      if (successMessage)
+        log.success(successMessage);
       onSuccess?.(data);
       return data;
     } catch (error) {
@@ -121,7 +123,7 @@ if (typeof window !== "undefined") {
     queued.forEach((fn) => fn());
   });
 }
-var index_default = callApi;
+var src_default = callApi;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   setGlobalErrorHandler
