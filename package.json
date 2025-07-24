@@ -15,7 +15,13 @@
     "type": "git",
     "url": "https://github.com/yourusername/react-superfetch"
   },
-  "keywords": ["react", "api", "fetch", "typescript", "utility"],
+  "keywords": [
+    "react",
+    "api",
+    "fetch",
+    "typescript",
+    "utility"
+  ],
   "author": "Pravin",
   "license": "MIT",
   "devDependencies": {

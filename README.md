@@ -13,84 +13,141 @@ Install the package via npm:
 npm install react-superfetch
 
 
-✨ Features
-✅ One-liner API call wrapper
+⚙️ Features
+✅ Easy one-liner API calls
 
-✅ Supports GET, POST, PUT, DELETE
+🔐 Authorization header with JWT token
 
-✅ Handles Authorization headers
+📥 Supports GET, POST, PUT, DELETE
 
-✅ Built-in loading, success, and error state handling
+📡 Offline sync & request queue
 
-✅ Works with React, Next.js, or any JS project
+🔁 Auto token refresh logic
+
+🌐 Global error handler integration
+
+🧪 Full TypeScript support
+
+⏱ Request timeout handling
+
+🌙 CLI logs dark-mode styling
+
+🔄 Built-in loading, success, and error messages
+
+🧰 Custom response transformers
 
 
-🔧 Usage
-Import callApi into your component or utility function:
+🧠 Usage
+1. Basic Example (GET)
 
 import callApi from 'react-superfetch';
 
-📘 Example Usage
+const data = await callApi('https://jsonplaceholder.typicode.com/posts/1');
 
-1. GET Request
+2. POST Example
 
-const { data, loading, error, successMessage, errorMessage } = await callApi('https://jsonplaceholder.typicode.com/posts/1', {
-  method: 'GET',
-  token: 'your-jwt-token',
-});
+const payload = { title: 'New Post', body: 'Content here' };
 
-2. POST Request
-
-const { data, loading, error, successMessage, errorMessage } = await callApi('https://jsonplaceholder.typicode.com/posts', {
+const response = await callApi('https://jsonplaceholder.typicode.com/posts', {
   method: 'POST',
-  body: { title: 'foo', body: 'bar', userId: 1 },
+  payload,
   token: 'your-jwt-token',
 });
 
-3. PUT Request
 
-const { data, loading, error, successMessage, errorMessage } = await callApi('https://jsonplaceholder.typicode.com/posts/1', {
+3. PUT Example
+
+const updated = { title: 'Updated Title' };
+
+await callApi('https://jsonplaceholder.typicode.com/posts/1', {
   method: 'PUT',
-  body: { id: 1, title: 'updated title', body: 'updated content', userId: 1 },
-  token: 'your-jwt-token',
+  payload: updated,
 });
 
-4. DELETE Request
+4. DELETE Example
 
-const { data, loading, error, successMessage, errorMessage } = await callApi('https://jsonplaceholder.typicode.com/posts/1', {
+await callApi('https://jsonplaceholder.typicode.com/posts/1', {
   method: 'DELETE',
-  token: 'your-jwt-token',
 });
 
 
-| Option   | Type   | Description                                      |
-| -------- | ------ | ------------------------------------------------ |
-| `method` | string | HTTP method (`GET`, `POST`, `PUT`, `DELETE`)     |
-| `body`   | object | Payload for POST/PUT requests                    |
-| `token`  | string | Bearer token for Authorization header (optional) |
+🛠 Advanced Options
+
+interface ApiOptions {
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  payload?: any;
+  token?: string;
+  headers?: Record<string, string>;
+  showLoading?: boolean;
+  showSuccess?: boolean;
+  showError?: boolean;
+  retry?: boolean;
+  timeout?: number;
+  onSuccessMessage?: string;
+  onErrorMessage?: string;
+}
 
 
-🔁 Return Values
-The function returns an object with the following keys:
 
-| Key              | Type    | Description                              |
-| ---------------- | ------- | ---------------------------------------- |
-| `data`           | any     | API response data                        |
-| `loading`        | boolean | `true` when request is in progress       |
-| `error`          | boolean | `true` if request failed                 |
-| `successMessage` | string  | Success message if request is successful |
-| `errorMessage`   | string  | Error message if request failed          |
+📋 Step-by-Step Integration
+
+1. Install the package
+
+npm install react-superfetch
+
+2. Import in your component or API layer
+
+import callApi from 'react-superfetch';
+
+3. Make requests using callApi(url, options)
+
+4. Optionally add global error handling
+
+window.addEventListener('unhandledrejection', event => {
+  console.error('Global Error:', event.reason);
+});
+
+5. For offline sync/queue, use the built-in queue system (in progress).
+
+🔒 Token Refresh Logic
+Automatically detects expired token (401).
+
+Refreshes token using a user-defined refreshToken() method.
+
+Retries original request once token is updated.
 
 
-💡 Advanced Tips
-Works with async/await or Promises
+📡 Offline Sync & Queue (Beta)
+Requests are stored in localStorage or IndexedDB when offline.
 
-Easily wrap this inside a custom React hook for global usage
+Synced automatically when back online.
 
-Compatible with useEffect, react-query, redux, etc.
+Toggle support via config: { enableQueue: true }
+
+
+🌐 Planned Features (Coming Soon)
+
+🔁 Automatic retries on failure
+
+🧰 Custom response transformers
+
+💾 Persistent request queue with IndexedDB
+
+🌙 Dark mode log styling (for CLI)
+
+📊 Axios-style interceptors
+
+📡 Real-time monitoring hooks
+
+
+Made with ❤️ by developers, for developers.
+
 
 
 📁 Contributing
+
+Pull requests are welcome. Please follow best practices and submit tests for new features or fixes.
+
 Fork this repo.
 
 Create a new branch: git checkout -b feature/my-feature
