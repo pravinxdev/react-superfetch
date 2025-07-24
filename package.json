@@ -1,0 +1,25 @@
+{
+  "name": "react-superfetch",
+  "version": "1.0.0",
+  "description": "One-line API call helper for React using fetch.",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --dts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/react-superfetch"
+  },
+  "keywords": ["react", "api", "fetch", "typescript", "utility"],
+  "author": "Pravin",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^7.2.0",
+    "typescript": "^5.4.0"
+  }
+}
